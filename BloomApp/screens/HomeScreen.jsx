@@ -1,5 +1,5 @@
 import { 
-    View, Text, Pressable, Button, KeyboardAvoidingView, 
+    View, KeyboardAvoidingView, 
     TouchableWithoutFeedback, Platform, Keyboard 
 } from "react-native";
 import { clearData } from "../functions/asyncstorage";
