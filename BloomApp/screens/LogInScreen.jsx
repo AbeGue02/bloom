@@ -1,43 +1,98 @@
-import { useContext } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
+import { useContext, useState } from "react";
+import { View, Text, TextInput, Pressable, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Alert, Button } from "react-native";
 import UserContext from "../Context";
 import styles from "../styles";
 import { LinearGradient } from 'expo-linear-gradient';
+import axios from "axios";
+import { storeData } from "../functions/asyncstorage";
 
 
-export default function LogInScreen() {
+export default function LogInScreen({ navigation }) {
 
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loginInvalid, setLoginInvalid] = useState(false)
+
+    const handleSubmit = async () => {
+        const requestBody = {
+            email: email,
+            password: password
+        }
+        let response = await axios.post(
+            `${process.env.BLOOM_SERVER_ADDRESS}/users/login`, 
+            requestBody, 
+            {
+                validateStatus: (status) => status < 500
+            }
+        )
+        switch (response.status) {
+            case 201: 
+                await storeData('user', response.data)
+                setUser(response.data)
+                break
+            case 403:
+                setLoginInvalid(true)
+                break
+            default:
+                Alert.alert('Unhandled Error', 'Please report this to us and we will fix it')
+        }
+        
+    }
 
     return (
-        // <Stack.Navigator initialRouteName="Log In">
-        <View style={styles.appContainer}>
+        <KeyboardAvoidingView 
+            style={styles.appContainer}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <LinearGradient
               colors={['#BBE783', '#0C5300']}
               style={styles.background}
             />
-            <View style={styles.cardContainer}>
-                <Text style={styles.titleText}>Bloom Habit</Text>
-                <>
-                    <Text style={styles.subtitleText}>Email</Text>
-                    <TextInput style={styles.textField}/>
-                </>
-                <>
-                    <Text style={styles.subtitleText}>Password</Text>
-                    <TextInput style={styles.textField}/>
-                    <Text style={styles.hyperlinkedText}>Forgot Password?</Text>
-                </>
-                <>
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Log In</Text>
-                    </Pressable>
-                    <Text style={styles.subtitleText}>or</Text>
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Create Account</Text>
-                    </Pressable>
-                </>
-            </View>
-        </View>
-        // </Stack.Navigator>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.cardContainer}>
+                    <Text style={styles.titleText}>Bloom Habit</Text>
+                    <>
+                        <Text style={styles.subtitleText}>Email</Text>
+                        <TextInput 
+                            style={[styles.textField, loginInvalid && styles.invalidTextField]}
+                            value={email}
+                            onChangeText={setEmail}
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect={false}/>
+                        
+                    </>
+                    <>
+                        <Text style={styles.subtitleText}>Password</Text>
+                        <TextInput 
+                            style={[styles.textField, loginInvalid && styles.invalidTextField]}
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect={false}/>
+                        <Button title="Forgot Password?"/>
+                    </>
+                    {
+                        loginInvalid && <Text style={styles.invalidText}>Login Information Invalid</Text>
+                    }
+                    <>
+                        <Pressable 
+                            style={styles.button}
+                            onPress={handleSubmit}>
+                            <Text style={styles.buttonText}>Log In</Text>
+                        </Pressable>
+                        <Text style={styles.subtitleText}>or</Text>
+                        <Pressable 
+                            style={styles.button}
+                            onPress={() => navigation.navigate('Create Account')}>
+                            <Text style={styles.buttonText}>Create Account</Text>
+                        </Pressable>
+                    </>
+                </View>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }
