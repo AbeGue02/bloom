@@ -5,6 +5,7 @@ import UserContext from './Context';
 import { getData } from './functions/asyncstorage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LogInScreen from './screens/LogInScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -28,7 +29,7 @@ export default function App() {
               {
                 user ? (
                   <>
-                    <Stack.Screen name='Home' component={LogInScreen}/>
+                    <Stack.Screen name='Home' component={HomeScreen}/>
                   </>
                 ) : (
                   <>

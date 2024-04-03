@@ -63,8 +63,14 @@ const styles = StyleSheet.create({
         margin: 10,
         fontFamily: 'American Typewriter'
     },
+    invalidTextField: {
+        borderColor: '#ff0000'
+    },
     hyperlinkedText: {
         color: 'blue'
+    },
+    invalidText: {
+        color: '#ff0000'
     },
 
     //COMPONENT STYLES
