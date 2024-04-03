@@ -5,7 +5,7 @@ import styles from "../styles";
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-export default function LogInScreen() {
+export default function LogInScreen({ navigation }) {
 
     const { user, setUser } = useContext(UserContext)
 
@@ -32,7 +32,9 @@ export default function LogInScreen() {
                         <Text style={styles.buttonText}>Log In</Text>
                     </Pressable>
                     <Text style={styles.subtitleText}>or</Text>
-                    <Pressable style={styles.button}>
+                    <Pressable 
+                        style={styles.button}
+                        onPress={() => navigation.navigate('Create Account')}>
                         <Text style={styles.buttonText}>Create Account</Text>
                     </Pressable>
                 </>

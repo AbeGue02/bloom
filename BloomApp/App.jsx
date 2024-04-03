@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
-import styles from './styles';
+import CreateAccountScreen from './screens/CreateAccountScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import UserContext from './Context';
 import { getData } from './functions/asyncstorage';
@@ -35,6 +33,7 @@ export default function App() {
                 ) : (
                   <>
                     <Stack.Screen name='Log In' component={LogInScreen} options={{headerShown: false}}/>
+                    <Stack.Screen name='Create Account' component={CreateAccountScreen} options={{headerShown: false}}/>
                   </>
                 )
               }

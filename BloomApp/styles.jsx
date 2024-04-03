@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
     
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#BBE783',
         alignItems: 'center',
         justifyContent: 'center',
     },
     appContainer: {
         flex: 1,
         width: '100%',
-        backgroundColor: 'transparent',
+        backgroundColor: '#BBE783',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     cardContainer: {
-        flex: 0.5,
+        // flex: 0.6,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     subtitleText: {
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: "American Typewriter"
     },
     textField: {
