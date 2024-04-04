@@ -55,9 +55,8 @@ const styles = StyleSheet.create({
         fontFamily: "American Typewriter"
     },
     textField: {
-        height: 30,
         width: '100%',
-        paddingHorizontal: 10,
+        padding: 10,
         borderColor: '#000',
         borderWidth: 1,
         borderRadius: 10,

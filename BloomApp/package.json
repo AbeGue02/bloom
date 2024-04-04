@@ -20,7 +20,6 @@
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-hook-form": "^7.51.2",
-    "react-icons": "^5.0.1",
     "react-native": "0.73.6",
     "react-native-element-dropdown": "^2.10.4",
     "react-native-emoji-input": "^1.1.10",
@@ -29,7 +28,8 @@
     "react-native-reanimated": "~3.6.2",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
-    "react-navigation": "^5.0.0"
+    "react-navigation": "^5.0.0",
+    "@react-native-community/datetimepicker": "7.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
