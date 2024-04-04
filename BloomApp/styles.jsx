@@ -29,16 +29,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
+        padding: 10,
+        paddingHorizontal: 20,
         borderRadius: 30,
-        marginHorizontal: 10,
-        width: '80%',
+        marginVertical: 10,
+        width: '90%',
         shadowColor: '#000',
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.3,
         shadowRadius: 30,
         shadowOffset: {
-            height: -10,
-            width: 10
+            height: -5,
+            width: 5
         }
     },
 
@@ -72,6 +73,9 @@ const styles = StyleSheet.create({
     invalidText: {
         color: '#ff0000'
     },
+    addNewHabitButtonText: {
+        color: '#0C5300'
+    },
 
     //COMPONENT STYLES
 
@@ -83,7 +87,12 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: 'white'
-    }
+    },
+    searchBar: {
+        flex: 1,
+        paddingVertical: 10,
+        fontSize: 18,
+    },
 })
 
 export default styles

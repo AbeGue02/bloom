@@ -31,8 +31,10 @@ export default function App() {
         {
           user ? (
             <Tab.Navigator>
-              <Tab.Screen name='Home' component={HomeScreen}/>
-              <Tab.Screen name='Profile' component={ProfileScreen}/>
+              <Tab.Group>
+                <Tab.Screen name='Home' component={HomeScreen}/>
+                <Tab.Screen name='Profile' component={ProfileScreen}/>
+              </Tab.Group>
             </Tab.Navigator>
           ) : (
             <Stack.Navigator>
