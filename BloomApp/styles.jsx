@@ -42,6 +42,20 @@ const styles = StyleSheet.create({
             width: 5
         }
     },
+    habitList: {
+        width: '90%',
+    },
+    habitListItem: {
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        paddingHorizontal: 20,
+        borderRadius: 30,
+        marginVertical: 10,
+        width: '100%',
+    },
 
     // TEXT STYLES
 
@@ -92,6 +106,15 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         fontSize: 18,
     },
+    habitCompleteButton: {
+        height: 30,
+        width: 30,
+        borderRadius: '50%',
+        borderWidth: 1,
+    },
+    habitCompleted: {
+        backgroundColor: '#0C5300'
+    }
 })
 
 export default styles

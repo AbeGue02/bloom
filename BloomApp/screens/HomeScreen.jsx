@@ -1,6 +1,6 @@
 import { 
     View, KeyboardAvoidingView, Pressable, Text,
-    TouchableWithoutFeedback, Platform, Keyboard, TextInput, StatusBar 
+    TouchableWithoutFeedback, Platform, Keyboard, TextInput, StatusBar, FlatList, ScrollView 
 } from "react-native";
 import { clearData } from "../functions/asyncstorage";
 import { useContext, useState, useEffect } from "react";
@@ -10,26 +10,30 @@ import styles from "../styles";
 import axios from "axios";
 import AddHabitButton from "../components/AddHabitButton";
 import AddHabitCard from "../components/AddHabitCard";
+import HabitListItem from "../components/HabitListItem";
 
 export default function HomeScreen({ navigation }) {
     
     const { user, setUser } = useContext(UserContext)
 
     const [searchBarText, setSearchBarText] = useState('')
-    const [habits, setHabits] = useState('')
+    const [habits, setHabits] = useState([])
     const [isUserAddingHabit, setIsUserAddingHabit] = useState(false)
 
     const toggleIsUserAddingHabit = () => setIsUserAddingHabit(!isUserAddingHabit)
 
     const getHabits = async () => {
         let response = await axios.get(`${process.env.BLOOM_SERVER_ADDRESS}/users/${user._id}/habits`)
-        console.log(response.data)
         setHabits(response.data)
     }
 
     useEffect(() => {
         getHabits()
     }, [])
+
+    useEffect(() => {
+        console.log(habits.length);
+    }, [habits])
     
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -50,8 +54,7 @@ export default function HomeScreen({ navigation }) {
                 </View>
             
                 {
-                    isUserAddingHabit
-                    ? (
+                    isUserAddingHabit ? (
                         <AddHabitCard 
                             getHabits={getHabits}
                             cancelFunction={toggleIsUserAddingHabit}/>
@@ -59,6 +62,22 @@ export default function HomeScreen({ navigation }) {
                         <AddHabitButton toggleFunc={toggleIsUserAddingHabit}/>
                     )
                 }
+
+                <ScrollView 
+                    style={styles.habitList}
+                    contentContainerStyle={{justifyContent: 'center'}}
+                    >
+                    {
+                        habits.length > 0 ? habits.map((habit) => (
+                            <HabitListItem habit={habit}/>
+                        )) : (
+                            <View>
+                                <Text>No Habits were found</Text>
+                            </View>
+                        )
+                    }
+                </ScrollView>
+
                 <StatusBar barStyle={'default'}/>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
