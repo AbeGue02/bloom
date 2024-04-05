@@ -1,33 +1,77 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Alert, Button } from "react-native";
 import styles from "../styles";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function HabitListItem({habit}) {
+export default function HabitListItem({habit, getHabits}) {
     
     const [isHabitCompleted, setIsHabitCompleted] = useState(false)
+    const [today, setToday] = useState()
 
-    const checkIfHabitCompleted = (completions) => {
+    const findDateIndex = (datesArray, targetDate) => {
+        if (datesArray.length > 0) {
+            for (let index = 0; index < datesArray.length; index++) {
+            const currentDate = datesArray[index];
         
-        const targetYear = new Date().getFullYear()
-        const targetMonth = new Date().getMonth()
-        const targetDate = new Date().getDate()
-        
-        completions.some((completion) => {
-          const year = dateObj.getFullYear()
-          const month = dateObj.getMonth()
-          const day = dateObj.getDate()
+                if (isSpecificDate(currentDate, targetDate)) {
+                    return index; 
+                }
+            }
+        } 
+        return -1;
+    };
       
-          if (year === targetYear && month === targetMonth && day === targetDate) {
-            return true
-          }
-        })
+    const isSpecificDate = (dateObj, targetDate) => {
 
-        return false
+        const targetYear = new Date(targetDate).getFullYear();
+        const targetMonth = new Date(targetDate).getMonth();
+        const targetDay = new Date(targetDate).getDate();
+        
+        const year = new Date(dateObj).getFullYear();
+        const month = new Date(dateObj).getMonth();
+        const day = new Date(dateObj).getDate();
+        
+        return year === targetYear && month === targetMonth && day === targetDay;
+    };      
+
+    const deleteHabit = async () => {
+        let response = await axios.delete(`${process.env.BLOOM_SERVER_ADDRESS}/habits/${habit._id}/delete`)
+        if (response.status === 200) {
+            Alert.alert("Habit Deleted", "Habit has been deleted") 
+            await getHabits()
+        } else { 
+            Alert.alert("Error", "An error has ocurred. Please try again later")
+        }
     }
 
     useEffect(() => {
-        console.log(checkIfHabitCompleted(habit.completions))
+        if (findDateIndex(habit.completions, new Date()) != -1) {
+            setIsHabitCompleted(true)
+        }
     }, [])
+
+    const handleChangeCompletion = async () => {
+ 
+        let newCompletions = [...habit.completions]
+
+        if (isHabitCompleted) {
+            // Remove completion
+            const indexForRemoval = findDateIndex(habit.completions, new Date())
+            indexForRemoval >= 0 && newCompletions.splice(indexForRemoval, 1)
+        } else {
+            // Add completion
+            findDateIndex(habit.completions, new Date()) === -1 && newCompletions.push(new Date())
+        }
+
+        let response = await axios.put(
+            `${process.env.BLOOM_SERVER_ADDRESS}/habits/${habit._id}/update`,
+            {...habit, completions: newCompletions}
+        )
+        response.status === 200 
+        ? setIsHabitCompleted(!isHabitCompleted) 
+        : Alert.alert("An Error has ocurred", "The server could not take your completion. Please try again later")
+
+    }
     
     return (
         <View 
@@ -38,12 +82,16 @@ export default function HabitListItem({habit}) {
             <View style={{marginRight: 10}}>
                 <Pressable 
                     style={[styles.habitCompleteButton, isHabitCompleted && styles.habitCompleted]}
-                    onPress={() => setIsHabitCompleted(!isHabitCompleted)}>
+                    onPress={handleChangeCompletion}>
                 </Pressable>
             </View>
 
             <View style={{flex: 1}}>
                 <Text>{habit.emoji} {habit.title}</Text>
+            </View>
+
+            <View style={{flexDirection: 'row'}}>
+                <Button title="🗑️" onPress={deleteHabit}/>
             </View>
 
         </View>

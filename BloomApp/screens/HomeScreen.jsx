@@ -27,6 +27,10 @@ export default function HomeScreen({ navigation }) {
         setHabits(response.data)
     }
 
+    const updateHabitByID = async () => {
+
+    }
+
     useEffect(() => {
         getHabits()
     }, [])
@@ -68,8 +72,11 @@ export default function HomeScreen({ navigation }) {
                     contentContainerStyle={{justifyContent: 'center'}}
                     >
                     {
-                        habits.length > 0 ? habits.map((habit) => (
-                            <HabitListItem habit={habit}/>
+                        habits.length > 0 ? habits.map((habit, index, habitsArray) => (
+                            <HabitListItem 
+                                habit={habit}
+                                getHabits={getHabits}
+                                key={habit._id}/>
                         )) : (
                             <View>
                                 <Text>No Habits were found</Text>
