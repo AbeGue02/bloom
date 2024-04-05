@@ -2,11 +2,14 @@ import { View, Text, Pressable, Alert, Button } from "react-native";
 import styles from "../styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import UpdateHabitCard from "./UpdateHabitCard";
 
 export default function HabitListItem({habit, getHabits}) {
     
     const [isHabitCompleted, setIsHabitCompleted] = useState(false)
-    const [today, setToday] = useState()
+    const [isUpdatingHabit, setIsUpdatingHabit] = useState(false)
+
+    const toggleIsUpdatingHabit = () => setIsUpdatingHabit(!isUpdatingHabit)
 
     const findDateIndex = (datesArray, targetDate) => {
         if (datesArray.length > 0) {
@@ -73,7 +76,7 @@ export default function HabitListItem({habit, getHabits}) {
 
     }
     
-    return (
+    return !isUpdatingHabit ? (
         <View 
             style={styles.habitListItem}
             key={habit._id}
@@ -91,9 +94,15 @@ export default function HabitListItem({habit, getHabits}) {
             </View>
 
             <View style={{flexDirection: 'row'}}>
+                <Button title="✏️" onPress={toggleIsUpdatingHabit}/>
                 <Button title="🗑️" onPress={deleteHabit}/>
             </View>
 
         </View>
+    ) : (
+        <UpdateHabitCard
+            habit={habit}
+            cancelFunction={toggleIsUpdatingHabit}
+            getHabits={getHabits}/>
     )
 }

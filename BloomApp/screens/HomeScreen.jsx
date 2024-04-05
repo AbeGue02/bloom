@@ -69,7 +69,7 @@ export default function HomeScreen({ navigation }) {
 
                 <ScrollView 
                     style={styles.habitList}
-                    contentContainerStyle={{justifyContent: 'center'}}
+                    contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
                     >
                     {
                         habits.length > 0 ? habits.map((habit, index, habitsArray) => (
