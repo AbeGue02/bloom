@@ -47,12 +47,6 @@ export default function HabitListItem({habit, getHabits}) {
         }
     }
 
-    useEffect(() => {
-        if (findDateIndex(habit.completions, new Date()) != -1) {
-            setIsHabitCompleted(true)
-        }
-    }, [])
-
     const handleChangeCompletion = async () => {
  
         let newCompletions = [...habit.completions]
@@ -75,7 +69,17 @@ export default function HabitListItem({habit, getHabits}) {
         : Alert.alert("An Error has ocurred", "The server could not take your completion. Please try again later")
 
     }
-    
+
+    useEffect(() => {
+        if (findDateIndex(habit.completions, new Date()) != -1) {
+            setIsHabitCompleted(true)
+        }
+    }, [])
+
+    useEffect(() => {
+        getHabits()
+    }, [isHabitCompleted])
+
     return !isUpdatingHabit ? (
         <View 
             style={styles.habitListItem}

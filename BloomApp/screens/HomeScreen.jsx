@@ -27,17 +27,9 @@ export default function HomeScreen({ navigation }) {
         setHabits(response.data)
     }
 
-    const updateHabitByID = async () => {
-
-    }
-
     useEffect(() => {
         getHabits()
     }, [])
-
-    useEffect(() => {
-        console.log(habits.length);
-    }, [habits])
     
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -71,6 +63,7 @@ export default function HomeScreen({ navigation }) {
                     style={styles.habitList}
                     contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
                     >
+
                     {
                         habits.length > 0 ? habits.map((habit, index, habitsArray) => (
                             <HabitListItem 
@@ -83,6 +76,7 @@ export default function HomeScreen({ navigation }) {
                             </View>
                         )
                     }
+
                 </ScrollView>
 
                 <StatusBar barStyle={'default'}/>

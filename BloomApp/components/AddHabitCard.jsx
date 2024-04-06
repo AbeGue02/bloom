@@ -29,7 +29,7 @@ export default function AddHabitCard({ cancelFunction, getHabits }) {
         title: "",
         notes: "",
         emoji: "",
-        frequency: "",
+        frequency: "daily",
         reminders: false,
         start_date: new Date(),
         end_date: new Date(),
@@ -37,14 +37,12 @@ export default function AddHabitCard({ cancelFunction, getHabits }) {
     })
 
     const handleSubmit = async () => {
-        let response = await axios.post(`${process.env.BLOOM_SERVER_ADDRESS}/habits/create`, newHabit)
-            .then((response) => {
+        await axios.post(`${process.env.BLOOM_SERVER_ADDRESS}/habits/create`, newHabit)
+            .then(() => {
                 getHabits()
                 cancelFunction()
             })
             .catch(() => Alert.alert("Error", "Make sure you have input valid data in all fields"))
-        getHabits()
-        cancelFunction()
     }
     
     useEffect(() => {
