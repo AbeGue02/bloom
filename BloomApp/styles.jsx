@@ -123,6 +123,12 @@ const styles = StyleSheet.create({
     }, 
     habitSectionHeader: {
         width: '50%'
+    },
+    profilePictureImage: {
+        height: 200,
+        width: 200,
+        borderRadius: 90,
+        marginVertical: 20
     }
 })
 
