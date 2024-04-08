@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
     addNewHabitButtonText: {
         color: '#0C5300'
     },
+    habitNotesText: {
+        paddingLeft: 5,
+        fontStyle: 'italic',
+        fontSize: 12,
+        color: 'gray'
+    },
 
     //COMPONENT STYLES
 
@@ -114,6 +120,9 @@ const styles = StyleSheet.create({
     },
     habitCompleted: {
         backgroundColor: '#0C5300'
+    }, 
+    habitSectionHeader: {
+        width: '50%'
     }
 })
 

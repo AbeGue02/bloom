@@ -63,10 +63,42 @@ export default function HomeScreen({ navigation }) {
                     style={styles.habitList}
                     contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
                     >
+                    <View style={[styles.cardContainer, styles.habitSectionHeader]}>
+                        <Text>Active Habits</Text>
+                    </View>
 
                     {
                         habits.length > 0 ? habits.filter((habit) => {
-                            return searchBarText === '' ? true : habit.title.includes(searchBarText)
+                            let isTodayValid = Date.now() > new Date(habit.start_date) && Date.now() < new Date(habit.end_date)
+                            if (isTodayValid) {
+                                return searchBarText === ''  ? true : habit.title.includes(searchBarText)
+                            } else {
+                                return false
+                            }
+                        }).map((habit, index, habitsArray) => (
+                            <HabitListItem 
+                                habit={habit}
+                                getHabits={getHabits}
+                                key={habit._id}/>
+                        )) : (
+                            <View>
+                                <Text>No Habits were found</Text>
+                            </View>
+                        )
+                    }
+
+                    <View style={[styles.cardContainer, styles.habitSectionHeader]}>
+                        <Text>Inactive Habits</Text>
+                    </View>
+
+                    {
+                        habits.length > 0 ? habits.filter((habit) => {
+                            let isTodayValid = Date.now() > new Date(habit.start_date) && Date.now() < new Date(habit.end_date)
+                            if (!isTodayValid) {
+                                return searchBarText === ''  ? true : habit.title.includes(searchBarText)
+                            } else {
+                                return false
+                            }
                         }).map((habit, index, habitsArray) => (
                             <HabitListItem 
                                 habit={habit}

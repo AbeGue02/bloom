@@ -95,6 +95,8 @@ export default function HabitListItem({habit, getHabits}) {
 
             <View style={{flex: 1}}>
                 <Text>{habit.emoji} {habit.title}</Text>
+                { habit.notes && <Text style={styles.habitNotesText }>{habit.notes}</Text>}
+                <Text style={styles.habitNotesText}>{new Date(habit.start_date).toLocaleDateString()} {'→'} {new Date(habit.end_date).toLocaleDateString()}</Text>
             </View>
 
             <View style={{flexDirection: 'row'}}>
