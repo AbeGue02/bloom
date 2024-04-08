@@ -65,7 +65,9 @@ export default function HomeScreen({ navigation }) {
                     >
 
                     {
-                        habits.length > 0 ? habits.map((habit, index, habitsArray) => (
+                        habits.length > 0 ? habits.filter((habit) => {
+                            return searchBarText === '' ? true : habit.title.includes(searchBarText)
+                        }).map((habit, index, habitsArray) => (
                             <HabitListItem 
                                 habit={habit}
                                 getHabits={getHabits}
