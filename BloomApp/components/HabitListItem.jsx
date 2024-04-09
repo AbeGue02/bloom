@@ -61,7 +61,7 @@ export default function HabitListItem({habit, getHabits}) {
         }
 
         let response = await axios.put(
-            `${process.env.BLOOM_SERVER_ADDRESS}/habits/${habit._id}/update`,
+            `${process.env.BLOOM_SERVER_ADDRESS}/habits/${habit._id}/update${isHabitCompleted ? '?completed=true' : ''}`,
             {...habit, completions: newCompletions}
         )
         response.status === 200 
