@@ -1,6 +1,6 @@
 import { 
     View, KeyboardAvoidingView, 
-    TouchableWithoutFeedback, Platform, Keyboard, Button, ScrollView, Image, Text 
+    TouchableWithoutFeedback, Platform, Keyboard, Button, ScrollView, Image, Text, Alert 
 } from "react-native";
 import { clearData, storeData } from "../functions/asyncstorage";
 import { useContext, useEffect } from "react";
@@ -36,8 +36,7 @@ export default function ProfileScreen() {
 
                 <ScrollView 
                     style={{flex: 1, width: '100%'}}
-                    contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                    contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center'}}>
                     
                     <View>
                         <Image 
@@ -46,8 +45,25 @@ export default function ProfileScreen() {
                     </View>
 
                     <View style={styles.cardContainer}>
-                        <Text style={styles.subtitleText}>{user.name} ({user.tier.name} {user.tier.emoji})</Text>
-                        <Text>{user.score}</Text>
+                        {
+                            user.name && (
+                                <>
+                                    <Text style={styles.subtitleText}>{user.name} ({user.tier.name} {user.tier.emoji})</Text>
+                                    <Text>{user.score}</Text>
+
+                                    <Text style={styles.subtitleText}>Username</Text>
+                                    <Text>{user.username}</Text>
+
+                                    <Text style={styles.subtitleText}>Email</Text>
+                                    <Text>{user.email}</Text>
+
+                                    <Text style={styles.subtitleText}>Date of Birth</Text>
+                                    <Text>{new Date(user.date_of_birth).toDateString()}</Text>
+
+                                    <Button title="Edit Profile Info"/>
+                                </>
+                            )
+                        }
                     </View>
                     
                     <View style={styles.cardContainer}>
@@ -63,9 +79,14 @@ export default function ProfileScreen() {
                         <Button 
                             title="Delete Account" 
                             color={'red'}
-                            onPress={() => {
-                                clearData()
-                                setUser()
+                            onPress={async () => {
+                                let response = await axios.delete(`${process.env.BLOOM_SERVER_ADDRESS}/users/${user._id}/delete`)
+                                if (response.status === 200) {
+                                    clearData()
+                                    setUser()
+                                } else {
+                                    Alert.alert("Error", "There was an error deleting your account. Please try again later")
+                                }
                             }}/>
                     </View>
                     

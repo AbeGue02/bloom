@@ -27,8 +27,15 @@ export default function HomeScreen({ navigation }) {
         setHabits(response.data)
     }
 
+    const getUser = async () => {
+        let response = await axios.get(`${process.env.BLOOM_SERVER_ADDRESS}/users/${user._id}`)
+        console.log(response.data)
+        setUser(response.data)
+        await getHabits()
+    }
+
     useEffect(() => {
-        getHabits()
+        getUser()
     }, [])
     
     return (

@@ -32,7 +32,10 @@ export default function App() {
           user ? (
             <Tab.Navigator>
               <Tab.Group>
-                <Tab.Screen name='Home' component={HomeScreen}/>
+                <Tab.Screen 
+                  name='Home' 
+                  component={HomeScreen}
+                  tabBarIcon={({}) => (<Text>🌸</Text>)}/>
                 <Tab.Screen name='Profile' component={ProfileScreen}/>
               </Tab.Group>
             </Tab.Navigator>

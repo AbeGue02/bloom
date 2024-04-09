@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     subtitleText: {
+        marginVertical: 5,
         fontSize: 20,
         fontFamily: "American Typewriter"
     },
