@@ -29,17 +29,32 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
+        padding: 10,
+        paddingHorizontal: 20,
         borderRadius: 30,
-        marginHorizontal: 10,
-        width: '80%',
+        marginVertical: 10,
+        width: '90%',
         shadowColor: '#000',
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.3,
         shadowRadius: 30,
         shadowOffset: {
-            height: -10,
-            width: 10
+            height: -5,
+            width: 5
         }
+    },
+    habitList: {
+        width: '90%',
+    },
+    habitListItem: {
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        paddingHorizontal: 20,
+        borderRadius: 30,
+        marginVertical: 10,
+        width: '100%',
     },
 
     // TEXT STYLES
@@ -50,13 +65,13 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     subtitleText: {
+        marginVertical: 5,
         fontSize: 20,
         fontFamily: "American Typewriter"
     },
     textField: {
-        height: 30,
         width: '100%',
-        paddingHorizontal: 10,
+        padding: 10,
         borderColor: '#000',
         borderWidth: 1,
         borderRadius: 10,
@@ -72,6 +87,15 @@ const styles = StyleSheet.create({
     invalidText: {
         color: '#ff0000'
     },
+    addNewHabitButtonText: {
+        color: '#0C5300'
+    },
+    habitNotesText: {
+        paddingLeft: 5,
+        fontStyle: 'italic',
+        fontSize: 12,
+        color: 'gray'
+    },
 
     //COMPONENT STYLES
 
@@ -83,6 +107,29 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: 'white'
+    },
+    searchBar: {
+        flex: 1,
+        paddingVertical: 10,
+        fontSize: 18,
+    },
+    habitCompleteButton: {
+        height: 30,
+        width: 30,
+        borderRadius: '50%',
+        borderWidth: 1,
+    },
+    habitCompleted: {
+        backgroundColor: '#0C5300'
+    }, 
+    habitSectionHeader: {
+        width: '50%'
+    },
+    profilePictureImage: {
+        height: 200,
+        width: 200,
+        borderRadius: 90,
+        marginVertical: 20
     }
 })
 

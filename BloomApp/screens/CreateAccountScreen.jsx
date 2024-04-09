@@ -34,8 +34,8 @@ export default function CreateAccountScreen({ navigation }) {
         console.log(response)
         switch (response.status) {
             case 201:
-                await storeData('user', response.data)
-                setUser(response.data)
+                await storeData('user', response.data.user)
+                setUser(response.data.user)
                 break
             case 403:
                 setEmailInvalid(true)
