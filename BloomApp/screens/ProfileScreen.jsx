@@ -2,7 +2,7 @@ import {
     View, KeyboardAvoidingView, 
     TouchableWithoutFeedback, Platform, Keyboard, Button, ScrollView, Image, Text, Alert 
 } from "react-native";
-import { clearData, storeData } from "../functions/asyncstorage";
+import { clearData } from "../functions/asyncstorage";
 import { useContext, useEffect } from "react";
 import UserContext from "../Context";
 import { LinearGradient } from "expo-linear-gradient";

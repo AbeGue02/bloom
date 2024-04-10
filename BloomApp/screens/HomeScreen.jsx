@@ -1,8 +1,7 @@
 import { 
-    View, KeyboardAvoidingView, Pressable, Text,
-    TouchableWithoutFeedback, Platform, Keyboard, TextInput, StatusBar, FlatList, ScrollView 
+    View, KeyboardAvoidingView, Text,
+    TouchableWithoutFeedback, Platform, Keyboard, TextInput, StatusBar, ScrollView 
 } from "react-native";
-import { clearData } from "../functions/asyncstorage";
 import { useContext, useState, useEffect } from "react";
 import UserContext from "../Context";
 import { LinearGradient } from "expo-linear-gradient";
