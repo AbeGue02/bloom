@@ -11,6 +11,7 @@ import axios from "axios";
 import AddHabitButton from "../components/AddHabitButton";
 import AddHabitCard from "../components/AddHabitCard";
 import HabitListItem from "../components/HabitListItem";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 export default function HomeScreen({ navigation }) {
     
@@ -36,6 +37,7 @@ export default function HomeScreen({ navigation }) {
 
     useEffect(() => {
         getUser()
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
     }, [])
     
     return (

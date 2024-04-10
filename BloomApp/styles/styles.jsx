@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 10,
         fontSize: 20,
-        fontFamily: "American Typewriter"
+        fontFamily: "American Typewriter",
+        textAlign: 'center'
     },
     textField: {
         width: '100%',
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#0C5300',
         padding: 10,
         borderRadius: 30,
-        marginVertical: 10
+        marginVertical: 10,
+        alignItems: 'center'
     },
     buttonText: {
         color: 'white'

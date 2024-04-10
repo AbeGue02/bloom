@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, Text, TextInput, Pressable, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Alert, Button, useWindowDimensions } from "react-native";
 import UserContext from "../Context";
 import styles from "../styles/styles";
@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import axios from "axios";
 import { storeData } from "../functions/asyncstorage";
 import landscapeStyles from "../styles/landscapeStyles";
-
+import * as ScreenOrientation from 'expo-screen-orientation'
 
 export default function LogInScreen({ navigation }) {
 
@@ -42,8 +42,11 @@ export default function LogInScreen({ navigation }) {
             default:
                 Alert.alert('Unhandled Error', 'Please report this to us and we will fix it')
         }
-        
     }
+
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT)
+    },[])
 
     return (
         <KeyboardAvoidingView 
@@ -82,7 +85,7 @@ export default function LogInScreen({ navigation }) {
                     {
                         loginInvalid && <Text style={styles.invalidText}>Login Information Invalid</Text>
                     }
-                    <View style={ !portraitMode ? {flexDirection: 'row', alignItems: 'center'} : "" }>
+                    <View style={ !portraitMode ? {flexDirection: 'row', alignItems: 'center'} : {alignItems: 'stretch'} }>
                         <Pressable 
                             style={styles.button}
                             onPress={handleSubmit}>
