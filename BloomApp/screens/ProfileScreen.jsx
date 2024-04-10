@@ -6,8 +6,10 @@ import { clearData, storeData } from "../functions/asyncstorage";
 import { useContext, useEffect } from "react";
 import UserContext from "../Context";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../styles";
+import styles from "../styles/styles";
 import axios from "axios";
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 export default function ProfileScreen() {
     
@@ -21,6 +23,7 @@ export default function ProfileScreen() {
 
     useEffect(() => {
         getUser()
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
     }, [])
     
     return (

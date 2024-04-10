@@ -1,19 +1,23 @@
-import { useContext, useState } from "react";
-import { View, Text, TextInput, Pressable, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Alert, Button } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import { View, Text, TextInput, Pressable, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Alert, Button, useWindowDimensions } from "react-native";
 import UserContext from "../Context";
-import styles from "../styles";
+import styles from "../styles/styles";
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from "axios";
 import { storeData } from "../functions/asyncstorage";
-
+import landscapeStyles from "../styles/landscapeStyles";
+import * as ScreenOrientation from 'expo-screen-orientation'
 
 export default function LogInScreen({ navigation }) {
 
     const { setUser } = useContext(UserContext)
+    const { height, width } = useWindowDimensions()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loginInvalid, setLoginInvalid] = useState(false)
+
+    const portraitMode = height > width
 
     const handleSubmit = async () => {
         const requestBody = {
@@ -38,8 +42,11 @@ export default function LogInScreen({ navigation }) {
             default:
                 Alert.alert('Unhandled Error', 'Please report this to us and we will fix it')
         }
-        
     }
+
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT)
+    },[])
 
     return (
         <KeyboardAvoidingView 
@@ -50,7 +57,7 @@ export default function LogInScreen({ navigation }) {
               style={styles.background}
             />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={styles.cardContainer}>
+                <View style={ portraitMode ? styles.cardContainer : landscapeStyles.cardContainer }>
                     <Text style={styles.titleText}>Bloom Habit</Text>
                     <>
                         <Text style={styles.subtitleText}>Email</Text>
@@ -78,7 +85,7 @@ export default function LogInScreen({ navigation }) {
                     {
                         loginInvalid && <Text style={styles.invalidText}>Login Information Invalid</Text>
                     }
-                    <>
+                    <View style={ !portraitMode ? {flexDirection: 'row', alignItems: 'center'} : {alignItems: 'stretch'} }>
                         <Pressable 
                             style={styles.button}
                             onPress={handleSubmit}>
@@ -90,7 +97,7 @@ export default function LogInScreen({ navigation }) {
                             onPress={() => navigation.navigate('Create Account')}>
                             <Text style={styles.buttonText}>Create Account</Text>
                         </Pressable>
-                    </>
+                    </View>
                 </View>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>

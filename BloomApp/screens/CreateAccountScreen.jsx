@@ -1,11 +1,12 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, TextInput, Pressable, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from "react-native";
-import styles from "../styles";
-import { useContext, useState } from "react";
+import styles from "../styles/styles";
+import { useContext, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import UserContext from "../Context";
 import { storeData } from "../functions/asyncstorage";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 export default function CreateAccountScreen({ navigation }) {
     
@@ -50,6 +51,10 @@ export default function CreateAccountScreen({ navigation }) {
           value: arg.nativeEvent.text,
         };
     };
+
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+    }, [])
 
     return (
         <KeyboardAvoidingView 
