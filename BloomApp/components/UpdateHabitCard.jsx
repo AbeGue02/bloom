@@ -84,23 +84,6 @@ export default function UpdateHabitCard({ habit, cancelFunction, getHabits }) {
                     {updatedHabit.emoji  && <Text style={{fontSize: 40}}>{updatedHabit.emoji}</Text>}
                     <Button title="Select" onPress={() => setEmojiSelectorVisible(!emojiSelectorVisible)}/>
                 </View>
-                
-                <View style={{flex: 0.5,}}>
-                    <Text>Frequency</Text>
-                    <Dropdown
-                        mode="default"
-                        value={updatedHabit.frequency}
-                        onChange={(item) => setUpdatedHabit({...updatedHabit, frequency: item.value})}
-                        labelField={'label'}
-                        valueField={'value'}
-                        data={[
-                            { label: 'Daily', value: 'daily' },
-                            { label: 'Weekly', value: 'weekly' },
-                            { label: 'Monthly', value: 'monthly' },
-                            { label: 'Yearly', value: 'yearly' },
-                        ]}/>
-                </View>
-
             </View>
 
             <View style={{flexDirection: 'row', paddingVertical: 10}}>
