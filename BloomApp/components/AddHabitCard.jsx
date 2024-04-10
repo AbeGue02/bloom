@@ -1,7 +1,6 @@
 import { View, Text, Button, Pressable, TextInput, Modal, Switch, Alert } from "react-native";
 import styles from "../styles/styles";
 import { useContext, useEffect, useState } from 'react';
-import { Dropdown } from 'react-native-element-dropdown';
 import EmojiSelector from 'react-native-emoji-selector'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from "axios";
@@ -86,22 +85,6 @@ export default function AddHabitCard({ cancelFunction, getHabits }) {
                     <Text>Emoji</Text>
                     {newHabit.emoji  && <Text style={{fontSize: 40}}>{newHabit.emoji}</Text>}
                     <Button title="Select" onPress={() => setEmojiSelectorVisible(!emojiSelectorVisible)}/>
-                </View>
-                
-                <View style={{flex: 0.5,}}>
-                    <Text>Frequency</Text>
-                    <Dropdown
-                        mode="default"
-                        value={newHabit.frequency}
-                        onChange={(item) => setNewHabit({...newHabit, frequency: item.value})}
-                        labelField={'label'}
-                        valueField={'value'}
-                        data={[
-                            { label: 'Daily', value: 'daily' },
-                            { label: 'Weekly', value: 'weekly' },
-                            { label: 'Monthly', value: 'monthly' },
-                            { label: 'Yearly', value: 'yearly' },
-                        ]}/>
                 </View>
 
             </View>
