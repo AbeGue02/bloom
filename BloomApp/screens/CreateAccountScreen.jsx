@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, TextInput, Pressable, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from "react-native";
-import styles from "../styles";
+import styles from "../styles/styles";
 import { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";

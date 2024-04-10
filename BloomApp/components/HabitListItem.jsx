@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Alert, Button } from "react-native";
-import styles from "../styles";
+import styles from "../styles/styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import UpdateHabitCard from "./UpdateHabitCard";

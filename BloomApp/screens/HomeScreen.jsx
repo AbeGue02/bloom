@@ -6,7 +6,7 @@ import { clearData } from "../functions/asyncstorage";
 import { useContext, useState, useEffect } from "react";
 import UserContext from "../Context";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../styles";
+import styles from "../styles/styles";
 import axios from "axios";
 import AddHabitButton from "../components/AddHabitButton";
 import AddHabitCard from "../components/AddHabitCard";

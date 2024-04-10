@@ -6,7 +6,7 @@ import { clearData, storeData } from "../functions/asyncstorage";
 import { useContext, useEffect } from "react";
 import UserContext from "../Context";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../styles";
+import styles from "../styles/styles";
 import axios from "axios";
 
 export default function ProfileScreen() {

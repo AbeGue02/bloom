@@ -1,5 +1,5 @@
 import { View, Text, Button, Pressable, TextInput, Modal, Switch, Alert } from "react-native";
-import styles from "../styles";
+import styles from "../styles/styles";
 import { useContext, useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 import EmojiSelector from 'react-native-emoji-selector'
