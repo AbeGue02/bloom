@@ -52,18 +52,13 @@ export default function ProfileScreen() {
                             user.name && (
                                 <>
                                     <Text style={styles.subtitleText}>{user.name} ({user.tier.name} {user.tier.emoji})</Text>
-                                    <Text>{user.score}</Text>
+                                    <Text>Score: {user.score}</Text>
 
                                     <Text style={styles.subtitleText}>Username</Text>
                                     <Text>{user.username}</Text>
 
                                     <Text style={styles.subtitleText}>Email</Text>
                                     <Text>{user.email}</Text>
-
-                                    <Text style={styles.subtitleText}>Date of Birth</Text>
-                                    <Text>{new Date(user.date_of_birth).toDateString()}</Text>
-
-                                    <Button title="Edit Profile Info"/>
                                 </>
                             )
                         }
