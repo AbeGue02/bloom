@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Alert, Button, useWindowDimensions } from "react-native";
+import { useContext, useEffect, useRef, useState } from "react";
+import { View, Text, TextInput, Pressable, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Alert, Button, useWindowDimensions, Animated } from "react-native";
 import UserContext from "../Context";
 import styles from "../styles/styles";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -17,7 +17,17 @@ export default function LogInScreen({ navigation }) {
     const [password, setPassword] = useState('')
     const [loginInvalid, setLoginInvalid] = useState(false)
 
+    const fadeAnim = useRef(new Animated.Value(0)).current
+
     const portraitMode = height > width
+
+    const fadeIn = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 2000,
+            useNativeDriver: true,
+        }).start()
+    }
 
     const handleSubmit = async () => {
         const requestBody = {
@@ -46,6 +56,7 @@ export default function LogInScreen({ navigation }) {
 
     useEffect(() => {
         ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT)
+        fadeIn()
     },[])
 
     return (
@@ -57,7 +68,7 @@ export default function LogInScreen({ navigation }) {
               style={styles.background}
             />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={ portraitMode ? styles.cardContainer : landscapeStyles.cardContainer }>
+                <Animated.View style={[ portraitMode ? styles.cardContainer : landscapeStyles.cardContainer , {opacity: fadeAnim}]}>
                     <Text style={styles.titleText}>Bloom Habit</Text>
                     <>
                         <Text style={styles.subtitleText}>Email</Text>
@@ -98,7 +109,7 @@ export default function LogInScreen({ navigation }) {
                             <Text style={styles.buttonText}>Create Account</Text>
                         </Pressable>
                     </View>
-                </View>
+                </Animated.View>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
     )
