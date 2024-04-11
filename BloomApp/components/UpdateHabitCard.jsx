@@ -46,7 +46,7 @@ export default function UpdateHabitCard({ habit, cancelFunction, getHabits }) {
     }
 
     return (
-        <View style={[styles.cardContainer, {width: '100%'}]}>
+        <Pressable style={[styles.cardContainer, {width: '100%'}]}>
 
             <Modal
                 animationType="slide"
@@ -138,6 +138,6 @@ export default function UpdateHabitCard({ habit, cancelFunction, getHabits }) {
                 <Button title="Cancel" onPress={cancelFunction} color={'red'}/>
                 <Button title="Submit" onPress={handleSubmit}/>
             </View>
-        </View>
+        </Pressable>
     )
 }

@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         }
     },
     habitList: {
+        flex: 1,
         width: '90%',
     },
     habitListItem: {

@@ -86,7 +86,7 @@ export default function HabitListItem({habit, getHabits}) {
     }, [isHabitCompleted])
 
     return !isUpdatingHabit ? (
-        <View 
+        <Pressable 
             style={styles.habitListItem}
             key={habit._id}
             >
@@ -109,7 +109,7 @@ export default function HabitListItem({habit, getHabits}) {
                 <Button title="🗑️" onPress={deleteHabit}/>
             </View>
 
-        </View>
+        </Pressable>
     ) : (
         <UpdateHabitCard
             habit={habit}

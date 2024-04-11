@@ -42,7 +42,7 @@ export default function HomeScreen({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView 
-                style={styles.appContainer}
+                style={[styles.appContainer]}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <LinearGradient
                 colors={['#BBE783', '#0C5300']}
@@ -69,7 +69,9 @@ export default function HomeScreen({ navigation }) {
 
                 <ScrollView 
                     style={styles.habitList}
-                    contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
+                    contentContainerStyle={{justifyContent: 'center', alignItems: 'center', flexGrow: 1}}
+                    vertical
+                    alwaysBounceVertical={true}
                     >
                     <View style={[styles.cardContainer, styles.habitSectionHeader]}>
                         <Text>Active Habits</Text>
