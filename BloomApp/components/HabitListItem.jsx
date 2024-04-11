@@ -1,11 +1,14 @@
 import { View, Text, Pressable, Alert, Button } from "react-native";
 import styles from "../styles/styles";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UpdateHabitCard from "./UpdateHabitCard";
+import UserContext from "../Context";
 
 export default function HabitListItem({habit, getHabits}) {
     
+    const { user, setUser } = useContext(UserContext)
+
     const [isHabitCompleted, setIsHabitCompleted] = useState(false)
     const [isUpdatingHabit, setIsUpdatingHabit] = useState(false)
 
@@ -55,9 +58,11 @@ export default function HabitListItem({habit, getHabits}) {
             // Remove completion
             const indexForRemoval = findDateIndex(habit.completions, new Date())
             indexForRemoval >= 0 && newCompletions.splice(indexForRemoval, 1)
+            setUser({...user, score: user.score - 10})
         } else {
             // Add completion
             findDateIndex(habit.completions, new Date()) === -1 && newCompletions.push(new Date())
+            setUser({...user, score: user.score + 10})
         }
 
         let response = await axios.put(
